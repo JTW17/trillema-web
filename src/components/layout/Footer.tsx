@@ -1,4 +1,6 @@
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer>
       <div className="footer-logo">
@@ -10,7 +12,7 @@ export function Footer() {
         <span className="footer-sep" aria-hidden="true">|</span>
         <a href="/datenschutz">Datenschutz</a>
         <span className="footer-sep" aria-hidden="true">|</span>
-        <span className="footer-copy">© 2026 Trillema GmbH. Alle Rechte vorbehalten.</span>
+        <span className="footer-copy">© {year} Trillema GmbH. Alle Rechte vorbehalten.</span>
       </div>
     </footer>
   );
