@@ -1,196 +1,207 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { Footer } from "@/components/layout/Footer";
 
 export const metadata = {
-  title: "Datenschutz",
+  title: "Datenschutz — Trillema GmbH",
   description: "Datenschutzerklärung der Trillema GmbH gemäss Schweizer DSG.",
 };
 
-const toc = [
-  ["verantwortlich", "Verantwortliche Stelle"],
-  ["allgemein", "Allgemeines"],
-  ["hosting", "Hosting"],
-  ["serverlogs", "Server-Logdateien"],
-  ["kontakt", "Kontaktaufnahme"],
-  ["google-fonts", "Google Fonts"],
-  ["analytics", "Analyse-Dienste"],
-  ["cookies", "Cookies"],
-  ["rechte", "Ihre Rechte"],
-  ["aenderungen", "Änderungen"],
-] as const;
+const TOC = String.raw`<div class="legal-toc">
+        <p class="legal-toc-title">Inhalt</p>
+        <ol class="legal-toc-list">
+            <li><a href="#verantwortlich"><span class="toc-num">1</span> Verantwortliche Stelle</a></li>
+            <li><a href="#allgemein"><span class="toc-num">2</span> Allgemeines</a></li>
+            <li><a href="#hosting"><span class="toc-num">3</span> Hosting</a></li>
+            <li><a href="#serverlogs"><span class="toc-num">4</span> Server-Logdateien</a></li>
+            <li><a href="#kontakt"><span class="toc-num">5</span> Kontaktaufnahme</a></li>
+            <li><a href="#google-fonts"><span class="toc-num">6</span> Google Fonts</a></li>
+            <li><a href="#analytics"><span class="toc-num">7</span> Analyse-Dienste</a></li>
+            <li><a href="#cookies"><span class="toc-num">8</span> Cookies</a></li>
+            <li><a href="#rechte"><span class="toc-num">9</span> Ihre Rechte</a></li>
+            <li><a href="#aenderungen"><span class="toc-num">10</span> Änderungen</a></li>
+        </ol>
+    </div>
+    <div class="legal-toc-divider"><hr></div>`;
+const CONTENT = String.raw`<!-- 1. Verantwortliche Stelle -->
+        <section class="legal-section" id="verantwortlich">
+            <h2><span class="section-num">1</span> Verantwortliche Stelle</h2>
+            <p>Verantwortlich für die Datenbearbeitung im Zusammenhang mit dieser Website ist:</p>
+            <div class="legal-data-grid" style="margin-top: 1rem;">
+                <span class="legal-data-label">Firma</span>
+                <span class="legal-data-value">Trillema GmbH</span>
+
+                <span class="legal-data-label">Adresse</span>
+                <span class="legal-data-value">Mattenweg 1, CH-5223 Riniken</span>
+
+                <span class="legal-data-label">E-Mail</span>
+                <span class="legal-data-value"><a href="mailto:connect@trillema.com">connect@trillema.com</a></span>
+
+                <span class="legal-data-label">Telefon</span>
+                <span class="legal-data-value"><a href="tel:+41765798606">+41 76 579 86 06</a></span>
+            </div>
+        </section>
+
+        <!-- 2. Allgemeines -->
+        <section class="legal-section" id="allgemein">
+            <h2><span class="section-num">2</span> Allgemeines zur Datenbearbeitung</h2>
+            <p>
+                Der Schutz Ihrer Personendaten ist uns ein wichtiges Anliegen. Wir bearbeiten Ihre Personendaten im Einklang mit dem Schweizer Bundesgesetz über den Datenschutz (DSG) sowie – soweit anwendbar – der europäischen Datenschutz-Grundverordnung (DSGVO).
+            </p>
+            <p>
+                Personendaten sind alle Angaben, die sich auf eine bestimmte oder bestimmbare natürliche Person beziehen. Wir bearbeiten Personendaten nur, soweit dies für die Bereitstellung einer funktionsfähigen Website, unserer Inhalte und Dienstleistungen erforderlich ist.
+            </p>
+            <p>
+                Ihre Personendaten werden nur so lange aufbewahrt, wie es für den jeweiligen Bearbeitungszweck erforderlich ist oder wie es gesetzliche Aufbewahrungspflichten vorsehen. Danach werden sie gelöscht oder anonymisiert.
+            </p>
+        </section>
+
+        <!-- 3. Hosting -->
+        <section class="legal-section" id="hosting">
+            <h2><span class="section-num">3</span> Hosting</h2>
+            <p>
+                Diese Website wird auf der Infrastruktur von Microsoft Azure gehostet. Die Bearbeitung erfolgt auf Grundlage unseres berechtigten Interesses an einer sicheren und effizienten Bereitstellung unseres Online-Angebots.
+            </p>
+            <div class="legal-data-grid" style="margin-top: 1rem;">
+                <span class="legal-data-label">Anbieter</span>
+                <span class="legal-data-value">Microsoft Ireland Operations Limited, One Microsoft Place, South County Business Park, Leopardstown, Dublin 18, Irland</span>
+
+                <span class="legal-data-label">Rechenzentrum</span>
+                <span class="legal-data-value">Europa (Azure Region: West Europe / Switzerland North)</span>
+
+                <span class="legal-data-label">Vertragsbasis</span>
+                <span class="legal-data-value">Auftragsbearbeitungsvertrag (Data Processing Agreement) gemäss Microsoft Online Services Terms</span>
+            </div>
+            <p style="margin-top: 1rem;">
+                Microsoft kann Personendaten in Länder ausserhalb der Schweiz und des EWR übermitteln. In solchen Fällen stellt Microsoft durch geeignete Garantien (insbesondere Standardvertragsklauseln) ein angemessenes Datenschutzniveau sicher. Weitere Informationen finden Sie in der <a href="https://privacy.microsoft.com/de-de/privacystatement" target="_blank" rel="noopener">Datenschutzerklärung von Microsoft</a>.
+            </p>
+        </section>
+
+        <!-- 4. Server-Logdateien -->
+        <section class="legal-section" id="serverlogs">
+            <h2><span class="section-num">4</span> Server-Logdateien</h2>
+            <p>
+                Bei jedem Zugriff auf diese Website werden automatisch Informationen in sogenannten Server-Logdateien gespeichert, die Ihr Browser automatisch übermittelt. Es handelt sich dabei um:
+            </p>
+            <ul>
+                <li>IP-Adresse des anfragenden Geräts</li>
+                <li>Datum und Uhrzeit des Zugriffs</li>
+                <li>Name und URL der abgerufenen Datei</li>
+                <li>Referrer-URL (zuvor besuchte Seite)</li>
+                <li>Verwendeter Browser und Betriebssystem</li>
+                <li>Übertragene Datenmenge</li>
+                <li>HTTP-Statuscode</li>
+            </ul>
+            <p>
+                Diese Daten werden für die Sicherstellung eines störungsfreien Betriebs der Website und zur Verbesserung unseres Angebots erhoben. Eine Zuordnung dieser Daten zu einer bestimmten Person ist uns nicht möglich. Eine Zusammenführung dieser Daten mit anderen Datenquellen findet nicht statt. Die Logdateien werden nach spätestens 30 Tagen automatisch gelöscht.
+            </p>
+        </section>
+
+        <!-- 5. Kontaktaufnahme -->
+        <section class="legal-section" id="kontakt">
+            <h2><span class="section-num">5</span> Kontaktaufnahme</h2>
+            <p>
+                Wenn Sie per E-Mail oder Telefon mit uns in Kontakt treten, werden die von Ihnen mitgeteilten Daten (z.B. Name, E-Mail-Adresse, Inhalt der Nachricht) von uns gespeichert, um Ihre Anfrage zu bearbeiten und für den Fall von Anschlussfragen. Diese Daten geben wir nicht ohne Ihre Einwilligung an Dritte weiter.
+            </p>
+            <p>
+                Die Bearbeitung dieser Daten erfolgt auf Grundlage Ihrer Kontaktaufnahme und – soweit es um vorvertragliche oder vertragliche Massnahmen geht – zur Durchführung dieser Massnahmen. Die von Ihnen übermittelten Daten werden gelöscht, sobald der Zweck der Bearbeitung entfällt und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+            </p>
+        </section>
+
+        <!-- 6. Google Fonts -->
+        <section class="legal-section" id="google-fonts">
+            <h2><span class="section-num">6</span> Google Fonts</h2>
+            <p>
+                Diese Website nutzt Schriftarten («Google Fonts») des Anbieters Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Beim Aufrufen unserer Seiten wird eine Verbindung zu den Servern von Google hergestellt, um die Schriftarten zu laden.
+            </p>
+            <p>
+                Dabei kann Ihre IP-Adresse an Google übermittelt werden. Google kann diese Daten in die USA übertragen. Google hat sich zur Einhaltung angemessener Datenschutzstandards verpflichtet. Weitere Informationen finden Sie in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a> sowie unter <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener">Google Fonts FAQ</a>.
+            </p>
+            <p>
+                Die Einbindung erfolgt auf Grundlage unseres berechtigten Interesses an einer einheitlichen und ansprechenden Darstellung unseres Online-Angebots.
+            </p>
+        </section>
+
+        <!-- 7. Analyse-Dienste -->
+        <section class="legal-section" id="analytics">
+            <h2><span class="section-num">7</span> Analyse-Dienste</h2>
+            <p>
+                Derzeit setzt diese Website keine Analyse- oder Tracking-Dienste ein.
+            </p>
+            <p>
+                Sollten wir künftig Analyse-Dienste (z.B. Google Analytics) implementieren, werden wir diese Datenschutzerklärung entsprechend aktualisieren und Sie vor der Aktivierung darüber informieren. Analyse-Dienste, die eine Datenbearbeitung in Drittländern vornehmen, werden nur unter Einhaltung geeigneter Garantien eingesetzt.
+            </p>
+        </section>
+
+        <!-- 8. Cookies -->
+        <section class="legal-section" id="cookies">
+            <h2><span class="section-num">8</span> Cookies</h2>
+            <p>
+                Diese Website verwendet derzeit keine Cookies, die über technisch notwendige Funktionen hinausgehen. Es werden keine Tracking-Cookies, Werbe-Cookies oder vergleichbare Technologien eingesetzt.
+            </p>
+            <p>
+                Sollten wir künftig Cookies einsetzen, die über das technisch Notwendige hinausgehen, werden wir Sie darüber informieren und – soweit erforderlich – Ihre Einwilligung einholen.
+            </p>
+        </section>
+
+        <!-- 9. Ihre Rechte -->
+        <section class="legal-section" id="rechte">
+            <h2><span class="section-num">9</span> Ihre Rechte</h2>
+            <p>
+                Sie haben gemäss dem Schweizer DSG und – soweit anwendbar – der DSGVO folgende Rechte in Bezug auf Ihre Personendaten:
+            </p>
+            <ul>
+                <li><strong>Auskunftsrecht:</strong> Sie können Auskunft darüber verlangen, ob und welche Personendaten wir über Sie bearbeiten (Art. 25 DSG).</li>
+                <li><strong>Recht auf Berichtigung:</strong> Sie können die Berichtigung unrichtiger Personendaten verlangen.</li>
+                <li><strong>Recht auf Löschung:</strong> Sie können die Löschung Ihrer Personendaten verlangen, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</li>
+                <li><strong>Recht auf Datenherausgabe:</strong> Sie können die Herausgabe Ihrer Personendaten in einem gängigen elektronischen Format verlangen (Art. 28 DSG).</li>
+                <li><strong>Widerspruchsrecht:</strong> Sie können der Bearbeitung Ihrer Personendaten jederzeit widersprechen.</li>
+            </ul>
+            <p>
+                Bitte richten Sie Anfragen zu Ihren Rechten an: <a href="mailto:connect@trillema.com">connect@trillema.com</a>. Wir werden Ihre Anfrage in der Regel innerhalb von 30 Tagen beantworten.
+            </p>
+
+            <h3>Aufsichtsbehörde</h3>
+            <p>
+                Zuständige Datenschutzaufsichtsbehörde in der Schweiz ist der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB). Sie haben das Recht, sich jederzeit an die Aufsichtsbehörde zu wenden: <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener">www.edoeb.admin.ch</a>.
+            </p>
+        </section>
+
+        <!-- 10. Änderungen -->
+        <section class="legal-section" id="aenderungen">
+            <h2><span class="section-num">10</span> Änderungen dieser Datenschutzerklärung</h2>
+            <p>
+                Wir behalten uns vor, diese Datenschutzerklärung jederzeit anzupassen, um sie an geänderte Rechtslagen oder bei Änderungen unseres Angebots und der Datenbearbeitung aktuell zu halten. Es gilt jeweils die auf dieser Website veröffentlichte, aktuelle Fassung.
+            </p>
+            <p>
+                Letzte Aktualisierung: 15. Februar 2026
+            </p>
+        </section>`;
 
 export default function DatenschutzPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <div className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-brand-gray100">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-sm text-brand-gray500 hover:text-brand-blue">
-            ← Zurück zur Startseite
-          </Link>
-          <div className="text-sm font-[var(--font-heading)] font-semibold text-brand-navy">Datenschutz</div>
-        </div>
-      </div>
+    <div className="legal-page">
+      <nav className="legal-nav" aria-label="Rechtliches Navigation">
+        <Link href="/" className="legal-nav-logo" aria-label="Zur Startseite">
+          <img src="/brand/logo-color.svg" alt="Trillema" />
+        </Link>
 
-      <header className="bg-brand-navyDeep text-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12">
-          <p className="text-xs tracking-[0.22em] uppercase text-brand-blue font-[var(--font-heading)] font-semibold">Rechtliches</p>
-          <h1 className="mt-3 text-3xl md:text-4xl font-[var(--font-heading)] font-light">
-            <span className="font-semibold">Datenschutz</span>
-          </h1>
-          <p className="mt-3 text-sm text-white/70">
-            Informationen zum Umgang mit Personendaten gemäss dem Schweizer Bundesgesetz über den Datenschutz (DSG). Gültig ab 15. Februar 2026.
-          </p>
+        <Link href="/" className="legal-nav-back">
+          <span dangerouslySetInnerHTML={{ __html: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` }} aria-hidden="true" />
+          Zurück zur Startseite
+        </Link>
+      </nav>
+
+      <header className="legal-hero">
+        <div className="legal-hero-inner">
+          <span className="legal-hero-label">Rechtliches</span>
+          <h1><strong>Datenschutz</strong></h1>
         </div>
       </header>
 
-      <nav className="mx-auto max-w-4xl px-4 sm:px-6 py-8">
-        <div className="text-xs tracking-[0.22em] uppercase text-brand-gray400 font-[var(--font-heading)] font-semibold">Inhalt</div>
-        <ol className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
-          {toc.map(([id, label], i) => (
-            <li key={id}>
-              <a className="text-brand-blue hover:underline" href={`#${id}`}>
-                <span className="text-brand-gray400 font-[var(--font-heading)] font-semibold mr-2">{i + 1}</span>
-                {label}
-              </a>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-8 border-t border-brand-gray100" />
-      </nav>
+      <div dangerouslySetInnerHTML={{ __html: TOC }} />
+      <main className="legal-content" dangerouslySetInnerHTML={{ __html: CONTENT }} />
 
-      <section className="mx-auto max-w-4xl px-4 sm:px-6 pb-16 space-y-10">
-        <Block id="verantwortlich" n="1" title="Verantwortliche Stelle">
-          <p className="text-sm text-brand-gray600">Verantwortlich für die Datenbearbeitung im Zusammenhang mit dieser Website ist:</p>
-          <Dl
-            items={[
-              ["Firma", site.legalName],
-              ["Adresse", site.contact.address],
-              ["E-Mail", <a className="text-brand-blue hover:underline" href={`mailto:${site.contact.email}`}>{site.contact.email}</a>],
-              ["Telefon", <a className="text-brand-blue hover:underline" href={`tel:${site.contact.phone}`}>{site.contact.phoneDisplay}</a>],
-            ]}
-          />
-        </Block>
-
-        <Block id="allgemein" n="2" title="Allgemeines zur Datenbearbeitung">
-          <P>
-            Der Schutz Ihrer Personendaten ist uns ein wichtiges Anliegen. Wir bearbeiten Ihre Personendaten im Einklang mit dem Schweizer Bundesgesetz über
-            den Datenschutz (DSG) sowie – soweit anwendbar – der europäischen Datenschutz-Grundverordnung (DSGVO).
-          </P>
-          <P>
-            Personendaten sind alle Angaben, die sich auf eine bestimmte oder bestimmbare natürliche Person beziehen. Wir bearbeiten Personendaten nur, soweit
-            dies für die Bereitstellung einer funktionsfähigen Website, unserer Inhalte und Dienstleistungen erforderlich ist.
-          </P>
-          <P>Ihre Personendaten werden nur so lange aufbewahrt, wie es für den jeweiligen Zweck erforderlich ist oder gesetzliche Pflichten es verlangen.</P>
-        </Block>
-
-        <Block id="hosting" n="3" title="Hosting">
-          <P>Diese Website wird auf der Infrastruktur von Microsoft Azure gehostet. Grundlage: berechtigtes Interesse an sicherer, effizienter Bereitstellung.</P>
-          <Dl
-            items={[
-              ["Anbieter", "Microsoft Ireland Operations Limited, One Microsoft Place, South County Business Park, Leopardstown, Dublin 18, Irland"],
-              ["Vertragsbasis", "Auftragsbearbeitungsvertrag (Data Processing Agreement) gemäss Microsoft Online Services Terms"],
-            ]}
-          />
-          <P>
-            Details:
-            {" "}
-            <a className="text-brand-blue hover:underline" target="_blank" rel="noopener" href="https://privacy.microsoft.com/de-de/privacystatement">
-              Microsoft Datenschutzerklärung
-            </a>.
-          </P>
-        </Block>
-
-        <Block id="serverlogs" n="4" title="Server-Logdateien">
-          <P>Bei Zugriff werden technisch bedingt Logdaten gespeichert: IP-Adresse, Datum/Uhrzeit, URL, Referrer, Browser/OS, Datenmenge, HTTP-Statuscode.</P>
-          <P>Logs dienen Betrieb/Sicherheit/Optimierung. Löschung spätestens nach 30 Tagen.</P>
-        </Block>
-
-        <Block id="kontakt" n="5" title="Kontaktaufnahme">
-          <P>Bei Kontakt per E-Mail/Telefon speichern wir die übermittelten Daten zur Bearbeitung und für Anschlussfragen. Keine Weitergabe ohne Einwilligung.</P>
-        </Block>
-
-        <Block id="google-fonts" n="6" title="Google Fonts">
-          <P>
-            Diese Website nutzt Google Fonts (Google Ireland Limited). Beim Aufruf kann eine Verbindung zu Google-Servern entstehen; IP kann übertragen werden.
-          </P>
-          <P>
-            Details:
-            {" "}
-            <a className="text-brand-blue hover:underline" target="_blank" rel="noopener" href="https://policies.google.com/privacy">
-              Google Datenschutzerklärung
-            </a>
-            {" "}
-            und
-            {" "}
-            <a className="text-brand-blue hover:underline" target="_blank" rel="noopener" href="https://developers.google.com/fonts/faq">
-              Google Fonts FAQ
-            </a>.
-          </P>
-        </Block>
-
-        <Block id="analytics" n="7" title="Analyse-Dienste">
-          <P>Derzeit keine Analyse- oder Tracking-Dienste. Bei künftiger Aktivierung wird die Erklärung aktualisiert.</P>
-        </Block>
-
-        <Block id="cookies" n="8" title="Cookies">
-          <P>Derzeit keine Cookies über technisch notwendige Funktionen hinaus (keine Tracking-/Werbe-Cookies).</P>
-        </Block>
-
-        <Block id="rechte" n="9" title="Ihre Rechte">
-          <P>Sie haben Rechte gemäss DSG (und ggf. DSGVO): Auskunft, Berichtigung, Löschung, Datenherausgabe, Widerspruch.</P>
-          <P>
-            Anfragen an:{" "}
-            <a className="text-brand-blue hover:underline" href={`mailto:${site.contact.email}`}>
-              {site.contact.email}
-            </a>
-            .
-          </P>
-          <h3 className="mt-6 text-sm font-[var(--font-heading)] font-semibold text-brand-navy">Aufsichtsbehörde</h3>
-          <P>
-            EDÖB:{" "}
-            <a className="text-brand-blue hover:underline" target="_blank" rel="noopener" href="https://www.edoeb.admin.ch">
-              www.edoeb.admin.ch
-            </a>
-          </P>
-        </Block>
-
-        <Block id="aenderungen" n="10" title="Änderungen">
-          <P>Wir behalten uns Anpassungen vor. Es gilt jeweils die aktuelle, veröffentlichte Fassung.</P>
-          <P>Letzte Aktualisierung: 15. Februar 2026</P>
-          <div className="mt-6 border-l-4 border-brand-blue bg-brand-iceWarm p-4 text-sm text-brand-gray600">
-            <strong className="text-brand-navy">Hinweis:</strong> Keine Rechtsberatung. Bei spezifischen Fragen: Fachperson beiziehen.
-          </div>
-        </Block>
-      </section>
-    </main>
-  );
-}
-
-function Block({ id, n, title, children }: { id: string; n: string; title: string; children: React.ReactNode }) {
-  return (
-    <div id={id}>
-      <h2 className="text-lg font-[var(--font-heading)] font-semibold text-brand-navy border-b border-brand-gray100 pb-3 flex gap-3 items-baseline">
-        <span className="text-brand-blue text-sm font-[var(--font-heading)] font-semibold">{n}</span>
-        {title}
-      </h2>
-      <div className="mt-4 space-y-3">{children}</div>
+      <Footer />
     </div>
   );
-}
-
-function Dl({ items }: { items: Array<[string, React.ReactNode]> }) {
-  return (
-    <dl className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-y-2 gap-x-6 text-sm">
-      {items.map(([k, v]) => (
-        <div key={k} className="contents">
-          <dt className="text-brand-gray400 font-[var(--font-heading)] font-semibold">{k}</dt>
-          <dd className="text-brand-gray600 whitespace-pre-line">{v}</dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
-
-function P({ children }: { children: React.ReactNode }) {
-  return <p className="text-sm text-brand-gray600 leading-relaxed">{children}</p>;
 }
