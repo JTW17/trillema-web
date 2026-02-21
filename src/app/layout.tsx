@@ -3,6 +3,7 @@ import { DM_Sans, Sora } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import "./legal.css";
+import "./footer.css";
 
 const sora = Sora({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap" });
