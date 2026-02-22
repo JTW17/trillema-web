@@ -8,8 +8,7 @@ type Article = {
   slug: string;
   title: string;
   excerpt: string;
-  date?: string;
-  body: string; // paragraphs separated by blank lines
+  body: string;
 };
 
 const ARTICLES: Article[] = [
@@ -18,32 +17,26 @@ const ARTICLES: Article[] = [
     title: "Warum Agilität nicht reicht",
     excerpt: "Agilität ist eine Technik. Plastizität ist Führung: Anpassung ohne Identitätsverlust.",
     body:
-      "Dieser Artikel ist ein Platzhalter, damit Static Export sauber funktioniert.\n\n" +
-      "Ersetze den Inhalt später durch deinen finalen Perspektiven-Text (800–1200 Wörter).",
+      "Platzhalter-Content, damit Static Export funktioniert.\n\n" +
+      "Ersetze das später mit deinem finalen Text.",
   },
   {
     slug: "skalierung-ohne-fragilitaet",
     title: "Skalierung ohne Fragilität",
     excerpt: "Wachstum entsteht nicht durch Tempo, sondern durch tragfähige Strukturen.",
-    body:
-      "Platzhalter-Content.\n\n" +
-      "Später: These, 3–4 stützende Gedanken, klare Schlussfolgerung.",
+    body: "Platzhalter-Content.\n\nSpäter: These, Argumente, Schlussfolgerung.",
   },
   {
     slug: "governance-die-atmet",
     title: "Governance, die atmet",
     excerpt: "Regeln sind kein Selbstzweck. Gute Governance erhöht Handlungsfähigkeit.",
-    body:
-      "Platzhalter-Content.\n\n" +
-      "Später: Governance als Enabler statt Bremse.",
+    body: "Platzhalter-Content.\n\nSpäter: Governance als Enabler statt Bremse.",
   },
   {
     slug: "ai-als-fuehrungsfrage",
     title: "AI als Führungsfrage",
     excerpt: "AI ist kein Tool-Projekt. Es ist ein Operating-Model-Thema.",
-    body:
-      "Platzhalter-Content.\n\n" +
-      "Später: Klarer Entscheidungsrahmen, Verantwortlichkeiten, Umsetzung.",
+    body: "Platzhalter-Content.\n\nSpäter: Rahmen, Verantwortung, Umsetzung.",
   },
 ];
 
@@ -53,30 +46,26 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const a = ARTICLES.find((x) => x.slug === params.slug);
-  if (!a) return {};
-  return {
-    title: `${a.title} — Trillema`,
-    description: a.excerpt,
-  };
+  return a ? { title: `${a.title} — Trillema`, description: a.excerpt } : {};
 }
 
-export default function PerspektiveDetailPage({ params }: { params: { slug: string } }) {
-  const article = ARTICLES.find((a) => a.slug === params.slug);
-  if (!article) notFound();
+export default function Page({ params }: { params: { slug: string } }) {
+  const a = ARTICLES.find((x) => x.slug === params.slug);
+  if (!a) notFound();
 
-  const paragraphs = article.body.split("\n\n").map((p) => p.trim()).filter(Boolean);
+  const paragraphs = a.body.split("\n\n").map((p) => p.trim()).filter(Boolean);
 
   return (
     <main className="mx-auto w-full max-w-3xl px-6 py-16">
-      <div className="mb-8">
-        <p className="text-sm opacity-70">{article.date ?? "Perspektive"}</p>
-        <h1 className="mt-2 text-3xl font-semibold leading-tight">{article.title}</h1>
-        <p className="mt-4 text-base opacity-80">{article.excerpt}</p>
-      </div>
+      <p className="text-sm opacity-70">Perspektive</p>
+      <h1 className="mt-2 text-3xl font-semibold leading-tight">{a.title}</h1>
+      <p className="mt-4 text-base opacity-80">{a.excerpt}</p>
 
-      <article className="prose prose-invert max-w-none">
+      <article className="mt-10 space-y-5">
         {paragraphs.map((p, i) => (
-          <p key={i}>{p}</p>
+          <p key={i} className="text-base leading-7 opacity-90">
+            {p}
+          </p>
         ))}
       </article>
     </main>
