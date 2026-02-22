@@ -1,30 +1,84 @@
 import { notFound } from "next/navigation";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { perspectives } from "@/lib/perspectives";
+import type { Metadata } from "next";
 
-export default function PerspectivePage({ params }: { params: { slug: string } }) {
-  const p = perspectives.find((x) => x.slug === params.slug);
-  if (!p) return notFound();
+export const dynamicParams = false;
+export const dynamic = "force-static";
+
+type Article = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date?: string;
+  body: string; // paragraphs separated by blank lines
+};
+
+const ARTICLES: Article[] = [
+  {
+    slug: "warum-agilitaet-nicht-reicht",
+    title: "Warum Agilität nicht reicht",
+    excerpt: "Agilität ist eine Technik. Plastizität ist Führung: Anpassung ohne Identitätsverlust.",
+    body:
+      "Dieser Artikel ist ein Platzhalter, damit Static Export sauber funktioniert.\n\n" +
+      "Ersetze den Inhalt später durch deinen finalen Perspektiven-Text (800–1200 Wörter).",
+  },
+  {
+    slug: "skalierung-ohne-fragilitaet",
+    title: "Skalierung ohne Fragilität",
+    excerpt: "Wachstum entsteht nicht durch Tempo, sondern durch tragfähige Strukturen.",
+    body:
+      "Platzhalter-Content.\n\n" +
+      "Später: These, 3–4 stützende Gedanken, klare Schlussfolgerung.",
+  },
+  {
+    slug: "governance-die-atmet",
+    title: "Governance, die atmet",
+    excerpt: "Regeln sind kein Selbstzweck. Gute Governance erhöht Handlungsfähigkeit.",
+    body:
+      "Platzhalter-Content.\n\n" +
+      "Später: Governance als Enabler statt Bremse.",
+  },
+  {
+    slug: "ai-als-fuehrungsfrage",
+    title: "AI als Führungsfrage",
+    excerpt: "AI ist kein Tool-Projekt. Es ist ein Operating-Model-Thema.",
+    body:
+      "Platzhalter-Content.\n\n" +
+      "Später: Klarer Entscheidungsrahmen, Verantwortlichkeiten, Umsetzung.",
+  },
+];
+
+export function generateStaticParams() {
+  return ARTICLES.map((a) => ({ slug: a.slug }));
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const a = ARTICLES.find((x) => x.slug === params.slug);
+  if (!a) return {};
+  return {
+    title: `${a.title} — Trillema`,
+    description: a.excerpt,
+  };
+}
+
+export default function PerspektiveDetailPage({ params }: { params: { slug: string } }) {
+  const article = ARTICLES.find((a) => a.slug === params.slug);
+  if (!article) notFound();
+
+  const paragraphs = article.body.split("\n\n").map((p) => p.trim()).filter(Boolean);
 
   return (
-    <>
-      <Header />
-      <main className="pt-16 bg-white">
-        <article className="mx-auto max-w-3xl px-4 sm:px-6 py-14">
-          <div className="text-xs tracking-[0.18em] uppercase text-brand-gray400 font-[var(--font-heading)] font-semibold">{p.tag}</div>
-          <h1 className="mt-4 text-3xl md:text-4xl font-[var(--font-heading)] font-light text-brand-navy">{p.title}</h1>
-          <p className="mt-4 text-brand-gray600 leading-relaxed">{p.excerpt}</p>
+    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+      <div className="mb-8">
+        <p className="text-sm opacity-70">{article.date ?? "Perspektive"}</p>
+        <h1 className="mt-2 text-3xl font-semibold leading-tight">{article.title}</h1>
+        <p className="mt-4 text-base opacity-80">{article.excerpt}</p>
+      </div>
 
-          <div className="mt-10 space-y-4 text-brand-gray600 leading-relaxed">
-            <p>
-              Template: Content folgt (nächster Schritt). Wenn du willst, machen wir das später mit MDX/Contentlayer — aktuell bleibt’s absichtlich minimal,
-              damit Build/Deploy einfach bleibt.
-            </p>
-          </div>
-        </article>
-      </main>
-      <Footer />
-    </>
+      <article className="prose prose-invert max-w-none">
+        {paragraphs.map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
+      </article>
+    </main>
   );
 }
