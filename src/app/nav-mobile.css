@@ -1,0 +1,85 @@
+/* Mobile-only overrides for Legacy nav. Keep this file small and loaded LAST. */
+
+:root {
+  --nav-offset: 88px; /* updated at runtime by NavMobileInit */
+}
+
+html {
+  scroll-padding-top: var(--nav-offset, 88px);
+}
+
+[id] {
+  scroll-margin-top: var(--nav-offset, 88px);
+}
+
+/* A11y focus ring for hamburger */
+.mobile-toggle:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  /* Switch from desktop inline links to hamburger */
+  .nav-links { display: none; }
+  .mobile-toggle { display: flex; }
+
+  /* Tighter paddings on phones */
+  nav { padding: 0.9rem 1.25rem; }
+  nav.scrolled { padding: 0.75rem 1.25rem; }
+
+  /* Prevent fixed nav overlap with hero */
+  .hero { padding-top: var(--nav-offset, 88px); }
+
+  /* Dropdown panel */
+  .nav-links.open {
+    display: flex !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.9rem 1.25rem 1.25rem;
+    z-index: 1000;
+
+    background: rgba(15, 36, 64, 0.98);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 18px 36px rgba(0,0,0,0.18);
+
+    max-height: calc(100vh - var(--nav-offset, 88px));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav.scrolled .nav-links.open {
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid rgba(26,58,92,0.10);
+    box-shadow: 0 18px 36px rgba(26,58,92,0.10);
+  }
+
+  .nav-links.open a { width: 100%; padding: 0.5rem 0; }
+
+  .nav-links.open .nav-cta {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+
+  /* When menu is open, keep nav readable even on hero */
+  nav.menu-open {
+    background: rgba(15, 36, 64, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  nav.scrolled.menu-open {
+    background: rgba(255, 255, 255, 0.98);
+  }
+
+  /* Optional scroll lock when menu is open */
+  html[data-scroll-lock="true"],
+  body[data-scroll-lock="true"] {
+    overflow: hidden;
+  }
+}

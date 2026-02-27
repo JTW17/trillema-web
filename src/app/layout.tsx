@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/lib/site";
 import "./legal.css";
 import "./footer.css";
+import "./nav-mobile.css";
 import NavMobileInit from "@/components/NavMobileInit";
 
 const sora = Sora({ subsets: ["latin"], variable: "--font-heading", display: "swap" });

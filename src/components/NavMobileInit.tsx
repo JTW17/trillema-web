@@ -35,12 +35,18 @@ export default function NavMobileInit() {
 
     if (!nav || !toggle || !links) return;
 
+    // Force a clean initial state (prevents "stuck open" after hydration/back nav).
+    links.classList.remove("open");
+    toggle.classList.remove("open");
+    nav.classList.remove("menu-open");
+    toggle.setAttribute("aria-expanded", "false");
+    setScrollLock(false);
+
     // Defensive: remove legacy inline onclick to prevent double toggles.
     toggle.removeAttribute("onclick");
     toggle.onclick = null;
 
     if (!links.id) links.id = "primary-navigation";
-
     toggle.setAttribute("aria-controls", links.id);
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Menü");
@@ -56,6 +62,7 @@ export default function NavMobileInit() {
     const updateNavOffset = () => {
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
+        // Measure nav height only (dropdown is absolute, shouldn't affect height).
         const h = Math.ceil(nav.getBoundingClientRect().height);
         document.documentElement.style.setProperty("--nav-offset", `${h}px`);
       });
@@ -67,6 +74,7 @@ export default function NavMobileInit() {
       if (!isOpen()) return;
       links.classList.remove("open");
       toggle.classList.remove("open");
+      nav.classList.remove("menu-open");
       toggle.setAttribute("aria-expanded", "false");
       setScrollLock(false);
       lastFocus?.focus?.();
@@ -78,9 +86,11 @@ export default function NavMobileInit() {
       lastFocus = document.activeElement as HTMLElement | null;
       links.classList.add("open");
       toggle.classList.add("open");
+      nav.classList.add("menu-open");
       toggle.setAttribute("aria-expanded", "true");
       setScrollLock(true);
 
+      // Focus first nav item for keyboard users.
       const first = links.querySelector<HTMLElement>(
         "a, button, [tabindex]:not([tabindex='-1'])"
       );
@@ -119,17 +129,18 @@ export default function NavMobileInit() {
     const onDocClick = (e: MouseEvent) => {
       if (!isOpen()) return;
       const target = e.target as Node | null;
-      if (target && nav.contains(target)) return;
-      close();
+      if (target && nav.contains(target)) return; // click inside nav/dropdown
+      close(); // click outside => close
     };
 
     const onLinksClick = (e: MouseEvent) => {
       if (!isOpen()) return;
       const target = e.target as HTMLElement | null;
       const link = target?.closest?.("a");
-      if (link) close();
+      if (link) close(); // link click => close
     };
 
+    // Close menu when crossing breakpoint upwards (avoid stale open state on desktop).
     const mql = window.matchMedia("(min-width: 769px)");
     const onBreakpointChange = () => {
       if (mql.matches) close();
