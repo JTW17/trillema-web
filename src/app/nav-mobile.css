@@ -25,7 +25,6 @@ html { scroll-padding-top: var(--nav-offset, 88px); }
 
   /* FIX: hero should not become "100vh + nav padding" */
   .hero {
-    /* Safari-friendly viewport units */
     min-height: calc(100vh - var(--nav-offset, 88px));
     min-height: calc(100svh - var(--nav-offset, 88px));
     padding-top: var(--nav-offset, 88px);
@@ -36,7 +35,7 @@ html { scroll-padding-top: var(--nav-offset, 88px); }
   .hero-label { margin-bottom: 2.25rem; }
   .hero-sub { margin-bottom: 3rem; }
 
-  /* Buttons: size/width consistent, less "too big" */
+  /* Buttons: size/width consistent */
   .hero-cta-row { flex-direction: column; align-items: center; gap: 0.85rem; }
   .btn-primary,
   .btn-secondary {
@@ -47,12 +46,10 @@ html { scroll-padding-top: var(--nav-offset, 88px); }
     font-size: 0.78rem;
   }
 
-  /* Global section spacing: reduce the 8rem vertical padding on mobile */
+  /* Global section spacing */
   section { padding: 5.5rem 1.25rem !important; }
 
-  /* Featured perspective: reduce padding + improve readability */
-  .pf-content { padding: 2.25rem 1.5rem; }
-  .pf-visual-inner { padding: 2.25rem 1.5rem; }
+  /* Improve readability on dark cards */
   .pf-excerpt { color: rgba(255,255,255,0.72); }
   .pf-visual-quote { color: rgba(255,255,255,0.72); }
   .pf-ai-label { color: rgba(255,255,255,0.60); }
@@ -106,5 +103,41 @@ html { scroll-padding-top: var(--nav-offset, 88px); }
   html[data-scroll-lock="true"],
   body[data-scroll-lock="true"] {
     overflow: hidden;
+  }
+
+  /* ==================== FIX: Map-Pfeil bei Standort ==================== */
+  /* Ziel: Pfeil nicht links "wegfloaten", sondern inline (rechts) oder sauber zentriert. */
+  .contact-section .contact-item { text-align: center; }
+
+  /* Wenn der Pfeil als pseudo-element (absolut) umgesetzt ist: inline zwingen */
+  .contact-section .contact-address-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .contact-section .contact-address-link::before,
+  .contact-section .contact-address-link::after {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    display: inline-block !important;
+  }
+
+  .contact-section .contact-address-link::before { margin-right: 0.6rem; margin-left: 0 !important; }
+  .contact-section .contact-address-link::after  { margin-left: 0.6rem; margin-right: 0 !important; }
+
+  /* Falls der Pfeil als eigenes Element/Icon gerendert wird */
+  .contact-section .contact-address-link .arrow,
+  .contact-section .contact-address-link .external-arrow,
+  .contact-section .contact-address-link .link-arrow,
+  .contact-section .contact-address-link svg {
+    position: static !important;
+    margin: 0 !important;
+    flex: 0 0 auto;
   }
 }
