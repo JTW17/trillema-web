@@ -37,7 +37,6 @@ export default function NavMobileInit() {
 
     // Defensive: remove legacy inline onclick to prevent double toggles.
     toggle.removeAttribute("onclick");
-    // @ts-expect-error legacy handler
     toggle.onclick = null;
 
     if (!links.id) links.id = "primary-navigation";
@@ -82,8 +81,9 @@ export default function NavMobileInit() {
       toggle.setAttribute("aria-expanded", "true");
       setScrollLock(true);
 
-      // Focus first nav item for keyboard users.
-      const first = links.querySelector<HTMLElement>("a, button, [tabindex]:not([tabindex='-1'])");
+      const first = links.querySelector<HTMLElement>(
+        "a, button, [tabindex]:not([tabindex='-1'])"
+      );
       first?.focus?.();
 
       updateNavOffset();
@@ -98,7 +98,7 @@ export default function NavMobileInit() {
 
     const onToggleClick = (e: Event) => {
       e.preventDefault();
-      e.stopPropagation(); // prevents React delegated onClick from firing (if present)
+      e.stopPropagation();
       toggleMenu();
     };
 
@@ -130,7 +130,6 @@ export default function NavMobileInit() {
       if (link) close();
     };
 
-    // Close menu when crossing breakpoint upwards (avoid stale open state on desktop).
     const mql = window.matchMedia("(min-width: 769px)");
     const onBreakpointChange = () => {
       if (mql.matches) close();
