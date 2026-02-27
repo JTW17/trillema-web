@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/lib/site";
 import "./legal.css";
 import "./footer.css";
+import NavMobileInit from "@/components/NavMobileInit";
 
 const sora = Sora({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap" });
@@ -25,7 +26,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={`${sora.variable} ${dmSans.variable}`}>
-      <body className="font-[var(--font-body)]">{children}</body>
+      <body className="font-[var(--font-body)]">
+        {children}
+        <NavMobileInit />
+      </body>
     </html>
   );
 }
